@@ -5,23 +5,7 @@ public class Caesar {
     // and returns the encrypted String
     // Ex. encryptCaesar("Hello, World!") => "Khoor, Zruog!"
     public static String encryptCaesar(String message) {
-        StringBuilder result = new StringBuilder();
-        for (char character : message.toCharArray()) {
-            if (character >= 'A' && character <= 'Z') {
-                int pos = character - 'A';
-                int newPos = (pos + 3) % 26;
-                char newChar = (char) ('A' + newPos);
-                result.append(newChar);
-            } else if (character >= 'a' && character <= 'z') {
-                int pos = character - 'a';
-                int newPos = (pos + 3) % 26;
-                char newChar = (char) ('a' + newPos);
-                result.append(newChar);
-            } else {
-                result.append(character);
-            }
-        }
-        return result.toString();
+        return encryptCaesarKey(message, 3);
     }
 
     // Given a String, decrypts the String with the Caesar cipher
