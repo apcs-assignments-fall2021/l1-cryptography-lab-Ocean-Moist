@@ -5,35 +5,63 @@ public class Caesar {
     // and returns the encrypted String
     // Ex. encryptCaesar("Hello, World!") => "Khoor, Zruog!"
     public static String encryptCaesar(String message) {
-        // REPLACE THIS WITH YOUR CODE
-        return message;
+        StringBuilder result = new StringBuilder();
+        for (char character : message.toCharArray()) {
+            if (character >= 'A' && character <= 'Z') {
+                int pos = character - 'A';
+                int newPos = (pos + 3) % 26;
+                char newChar = (char) ('A' + newPos);
+                result.append(newChar);
+            } else if (character >= 'a' && character <= 'z') {
+                int pos = character - 'a';
+                int newPos = (pos + 3) % 26;
+                char newChar = (char) ('a' + newPos);
+                result.append(newChar);
+            } else {
+                result.append(character);
+            }
+        }
+        return result.toString();
     }
 
     // Given a String, decrypts the String with the Caesar cipher
     // and returns the original String
     // Ex. decryptCaesar("Khoor, Zruog!") => "Hello, World!"
     public static String decryptCaesar(String message) {
-        // REPLACE THIS WITH YOUR CODE
-        return message;
+        return encryptCaesarKey(message, 26 - (3 % 26));
     }
+
 
     // Given a String and a key corresponding to a shift, encrypts
     // the String using the given key and returns the encrypted String
     // Ex. encryptCaesarKey("Hello, World!", 5) => "Mjqqt, Btwqi!".
     public static String encryptCaesarKey(String message, int key) {
-        // REPLACE THIS WITH YOUR CODE
-        return message;
+        StringBuilder result = new StringBuilder();
+        for (char character : message.toCharArray()) {
+            if (character >= 'A' && character <= 'Z') {
+                int pos = character - 'A';
+                int newPos = (pos + key) % 26;
+                char newChar = (char) ('A' + newPos);
+                result.append(newChar);
+            } else if (character >= 'a' && character <= 'z') {
+                int pos = character - 'a';
+                int newPos = (pos + key) % 26;
+                char newChar = (char) ('a' + newPos);
+                result.append(newChar);
+            } else {
+                result.append(character);
+            }
+        }
+        return result.toString();
     }
+
 
     // Given a String and a key corresponding to a shift, decrypts
     // the String using the given key and returns the original String
     // Ex. decryptCaesarKey("Mjqqt, Btwqi!", 5) => "Hello, World!"
     public static String decryptCaesarKey(String message, int key) {
-        // REPLACE THIS WITH YOUR CODE
-        return message;
+        return encryptCaesarKey(message, 26 - (key % 26));
     }
-
-
     // The main method is already provided for you
     // You do not need to edit this code until Part 2
     public static void main(String[] args) {
