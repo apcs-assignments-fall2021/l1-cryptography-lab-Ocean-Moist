@@ -20,20 +20,20 @@ public class Caesar {
     // the String using the given key and returns the encrypted String
     // Ex. encryptCaesarKey("Hello, World!", 5) => "Mjqqt, Btwqi!".
     public static String encryptCaesarKey(String message, int key) {
-        StringBuilder result = new StringBuilder();
+        String result = "";
         for (char character : message.toCharArray()) {
             if (character >= 'A' && character <= 'Z') {
                 int pos = character - 'A';
                 int newPos = (pos + key) % 26;
                 char newChar = (char) ('A' + newPos);
-                result.append(newChar);
+                result += newChar;
             } else if (character >= 'a' && character <= 'z') {
                 int pos = character - 'a';
                 int newPos = (pos + key) % 26;
                 char newChar = (char) ('a' + newPos);
-                result.append(newChar);
+                result += newChar;
             } else {
-                result.append(character);
+                result += character;
             }
         }
         return result.toString();
