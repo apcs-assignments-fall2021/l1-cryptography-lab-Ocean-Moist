@@ -3,8 +3,7 @@ import java.util.Scanner;
 public class Vigenere {
     public static String encryptVigenere(String message, String key) {
         key = generateKey(message, key);
-        String cipher_text="";
-        System.out.println(key);
+        String cipher_text = "";
         for (int i = 0; i < message.length(); i++) {
             if (message.charAt(i) >= 'A' && message.charAt(i) <= 'Z') {
                 int x = (message.charAt(i) + key.charAt(i)) % 26;
@@ -12,7 +11,8 @@ public class Vigenere {
                 cipher_text += (char) (x);
             }
             else if (message.charAt(i) >= 'a' && message.charAt(i) <= 'z') {
-                int x = (message.charAt(i) + Character.toLowerCase(key.charAt(i)) % 26);
+                String keyl = key.toLowerCase();
+                int x = (message.charAt(i) + keyl.charAt(i) + 14) % 26; // magic number ftw
                 x += 'a';
                 cipher_text += (char) (x);
             }
@@ -23,41 +23,34 @@ public class Vigenere {
         return cipher_text;
     }
     public static String generateKey(String message, String key) {
-        int x = key.length();
-        int j = 0;
+        int j = -1; // lazy fix lol
         String keyf = "";
-        for (int i = 0; keyf.length() == message.length(); i++) {
-            j++;
-            System.out.println(j);
-            if (message.charAt(j) >= 'A' && message.charAt(j) <= 'Z' || message.charAt(j) >= 'a' && message.charAt(j) <= 'z') {
-                if (x == i) {
-                    i = 0;
-                }
-                keyf += (key.charAt(i));
+        for (char i : message.toCharArray()) {
+            if (i >= 'A' && i <= 'Z' || i >= 'a' && i <= 'z') {
+                j++;
+                keyf += key.charAt(j % key.length());
             }
             else {
                 keyf += (char) 0;
             }
         }
         return keyf;
-//        int x = key.length();
-//        int j = 0;
-//        String keyf = "";
-//        for (char i : message.toCharArray()) {
-//            if ( i >= 'A' && i <= 'Z' || i >= 'a' && i <= 'z') {
-//               j++;
-//               keyf += key.charAt(j % x);
-//            }
-//            else {
-//                keyf += (char) 0;
-//            }
-//        }
-//        return keyf;
     }
 
     public static String decryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        String fin = "";
+        String keyf = "";
+        for (char i : key.toCharArray()) {
+            keyf += (char) (-i - 16);
+        }
+        for (char i : encryptVigenere(message, keyf).toCharArray()) {
+            if  (i >= 'a' && i <= 'z') {
+                i += 6; //magic number
+                i = (char) ((char) ((i - 'a') % 26) + 'a'); // I dont want to talk about it
+            }
+            fin += i;
+        }
+        return fin;
     }
 
 

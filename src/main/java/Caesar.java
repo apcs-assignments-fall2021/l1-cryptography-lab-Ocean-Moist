@@ -12,7 +12,7 @@ public class Caesar {
     // and returns the original String
     // Ex. decryptCaesar("Khoor, Zruog!") => "Hello, World!"
     public static String decryptCaesar(String message) {
-        return encryptCaesarKey(message, 26 - (3 % 26));
+        return encryptCaesarKey(message, 26 - 3);
     }
 
 
